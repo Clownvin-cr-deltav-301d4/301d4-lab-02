@@ -1,0 +1,20 @@
+* {
+  font-family: 'Just Me Again Down Here', cursive;
+  /*outline: 1px solid black;*/
+}
+
+h1 {
+  font-size: 500%;
+}
+
+#keywords {
+  font-size: 130%;
+}
+
+section.image h3 {
+  font-size: 150%;
+}
+
+section.image p {
+  font-size: 125%;
+}
