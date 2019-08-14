@@ -22,6 +22,19 @@ class Image {
 $(document).ready(() => {
   const images = [];
   const main = $('main');
+
+  function redraw(){
+    let keyword = $('#keywords').val();
+    main.empty();
+    for (const img of images) {
+      console.log(keyword);
+      if (keyword !== 'default' && img.keyword === keyword){
+        main.append(img.getElement());
+      } else if (keyword === 'default') {
+        main.append(img.getElement());
+      }
+    }
+  }
   
   $.get('./data/page-1.json', data => {
     // data = JSON.parse(data);
@@ -33,14 +46,16 @@ $(document).ready(() => {
     }
   });
 
-  $('#keywords').change(event => {
-    let keyword = $('#keywords').val();
-    main.empty();
-    for(const img of images){
-      if (img.keyword === keyword){
-        main.append(img.getElement());
-      }
+  $('#keywords').change(event => redraw());
+
+  $("#sort").change(event => {
+    let sortby = $('#sort').val();
+    if(sortby === 'horns'){
+      images.sort((a, b) => a.horns - b.horns);
+    } else if (sortby === 'title'){
+      images.sort((a, b) => a.title.localeCompare(b.title));
     }
+    redraw();
   });
 });
 
