@@ -30,13 +30,24 @@ class Image {
 
 $(document).ready(() => {
   const images = [];
+  const main = $('main');
   $.get('./data/page-1.json', (data) => {
-    data = JSON.parse(data);
+    // data = JSON.parse(data);
     for (const imageJson of data) {
       images.push(new Image(imageJson));
     }
     for (const image of images) {
-      $('main').append(image.getElement());
+      main.append(image.getElement());
+    }
+  });
+  $("#keywords").change(event => {
+    let keyword = $('#keywords').val();
+    main.empty();
+    for(const img of images){
+      if (img.keyword === keyword){
+        main.append(img.getElement());
+      }
     }
   });
 });
+
