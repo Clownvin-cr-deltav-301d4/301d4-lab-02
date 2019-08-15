@@ -10,17 +10,6 @@ $(document).ready(() => {
       this.horns = imageJson.horns;
       //Element
       this.element = $(imageTemplate(this));
-      console.log(this.element.children('img'));
-      this.element.children('img').click(() => {
-        console.log('clicked');
-        modal.css('display', 'block');
-        modalImg.attr('src', this.url);
-        modalCaption.text(this.description);
-      });
-    }
-
-    getElement() {
-      return this.element;
     }
   }
 
@@ -44,10 +33,19 @@ $(document).ready(() => {
       if (!img.keyword.toLowerCase().includes(searchterm) && !img.title.toLowerCase().includes(searchterm)) {
         continue;
       }
+      let element;
       if (keyword !== 'default' && img.keyword === keyword){
-        main.append(img.getElement());
+        main.append(element = img.element);
       } else if (keyword === 'default') {
-        main.append(img.getElement());
+        main.append(element = img.element);
+      }
+      if (element) {
+        element.children('img').click(() => {
+          modal.css('display', 'block');
+          modalImg.attr('src', img.url);
+          modalCaption.text(img.description);
+          console.log('click');
+        });
       }
     }
   }
@@ -85,6 +83,6 @@ $(document).ready(() => {
 
   $('#close').click(() => {
     modal.css('display', 'none');
-  })
+  });
 });
 
