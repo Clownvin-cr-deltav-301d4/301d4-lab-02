@@ -1,3 +1,7 @@
+:root {
+  --white: #CCC;
+}
+
 * {
   font-family: 'Just Me Again Down Here', cursive;
   /*outline: 1px solid black;*/
@@ -48,7 +52,7 @@ section.image p {
 
 #modal-caption {
   text-align: center;
-  color: #CCC;
+  color: var(--white);
   font-size: 150%;
 }
 
@@ -65,14 +69,14 @@ section.image p {
   position: absolute;
   top: 0px;
   right: 30px;
-  color: #CCC;
+  color: var(--white);
   font-size: 500%;
   font-weight: bold;
   transition: 0.3s;
 }
 
 #close:hover, #close:focus {
-  color: #AAA;
+  color: calc(var(--white) * 0.9);
   text-decoration: none;
   cursor: pointer;
 }
