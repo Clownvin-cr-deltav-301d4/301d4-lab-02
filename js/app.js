@@ -27,10 +27,10 @@ $(document).ready(() => {
 
   function redraw(){
     let keyword = keywordDropdown.val();
-    let searchterm = $('#searchbar').val();
+    let searchterm = $('#searchbar').val().toLowerCase();
     main.empty();
     for (const img of images) {
-      if (!img.keyword.includes(searchterm) && !img.title.includes(searchterm)) {
+      if (!img.keyword.toLowerCase().includes(searchterm) && !img.title.toLowerCase().includes(searchterm)) {
         continue;
       }
       if (keyword !== 'default' && img.keyword === keyword){
