@@ -27,8 +27,12 @@ $(document).ready(() => {
 
   function redraw(){
     let keyword = keywordDropdown.val();
+    let searchterm = $('#searchbar').val();
     main.empty();
     for (const img of images) {
+      if (!img.keyword.includes(searchterm) && !img.title.includes(searchterm)) {
+        continue;
+      }
       if (keyword !== 'default' && img.keyword === keyword){
         main.append(img.getElement());
       } else if (keyword === 'default') {
@@ -65,5 +69,7 @@ $(document).ready(() => {
     }
     redraw();
   });
+
+  $('#searchbar').on('input', () => redraw());
 });
 
