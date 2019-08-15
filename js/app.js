@@ -10,6 +10,13 @@ $(document).ready(() => {
       this.horns = imageJson.horns;
       //Element
       this.element = $(imageTemplate(this));
+      console.log(this.element.children('img'));
+      this.element.children('img').click(() => {
+        console.log('clicked');
+        modal.css('display', 'block');
+        modalImg.attr('src', this.url);
+        modalCaption.text(this.description);
+      });
     }
 
     getElement() {
@@ -21,6 +28,10 @@ $(document).ready(() => {
   const main = $('main');
   const keywordDropdown = $('#keywords');
   const sortDropdown = $('#sort');
+  //Modal stuff
+  const modal = $('#modal');
+  const modalImg = $('#modal-img');
+  const modalCaption = $('#modal-caption');
 
   const imageTemplateSource = $('#image-template').html();
   const imageTemplate = Handlebars.compile(imageTemplateSource);
@@ -71,5 +82,9 @@ $(document).ready(() => {
   });
 
   $('#searchbar').on('input', () => redraw());
+
+  $('#close').click(() => {
+    modal.css('display', 'none');
+  })
 });
 
