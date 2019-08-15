@@ -23,3 +23,6 @@ main{
   display: flex;
   flex-wrap:wrap;
 }
+nav{
+  font-size: 175%;
+}
