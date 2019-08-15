@@ -27,7 +27,6 @@ $(document).ready(() => {
     let keyword = $('#keywords').val();
     main.empty();
     for (const img of images) {
-      console.log(keyword);
       if (keyword !== 'default' && img.keyword === keyword){
         main.append(img.getElement());
       } else if (keyword === 'default') {
@@ -37,18 +36,18 @@ $(document).ready(() => {
   }
   
   $.get('./data/page-1.json', data => {
-    // data = JSON.parse(data);
+    if (typeof data === 'string') {
+      data = JSON.parse(data);
+    }
     for (const imageJson of data) {
       images.push(new Image(imageJson));
     }
-    for (const image of images) {
-      main.append(image.getElement());
-    }
+    redraw();
   });
 
-  $('#keywords').change(event => redraw());
+  $('#keywords').change(redraw);
 
-  $("#sort").change(event => {
+  $('#sort').change(() => {
     let sortby = $('#sort').val();
     if(sortby === 'horns'){
       images.sort((a, b) => a.horns - b.horns);
